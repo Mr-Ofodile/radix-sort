@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+        how to radix sort
+        </title>
+    </head>
+    <body>
+            <h2 style="font-family: monospace; font-size: 200px "> 
+            how to radix sort
+            </h2>
+        <script>
+            //radix sort first you have to build a few helpers
+            
+            function getDigits(num, i)
+            {
+                return Math.floor(Math.abs(num)/Math.pow(10,i)) % 10;
+            }
+            
+            function digitCount(num)
+            {
+                if(num === 0)return 1;
+                return Math.floor(Math.log10(Math.abs(num))) + 1;
+                
+            }
+            
+            function mostDigits(nums)
+            {
+                let maxDigits = 0;
+                for(let i = 0; i < nums.length; i++)
+                {
+                    maxDigits = Math.max(maxDigits,digitCount(nums[i]));
+                    
+                }
+                return maxDigits;
+            }
+            
+            function raddix(nums)
+            {
+                let maxCount = mostDigits(nums);
+                for(let k = 0; k < maxCount; k++)
+                {
+                    let bucket = Array.from({length:10},()=>[]);
+                    for(i = 0; i < nums.length; i++)
+                    {
+                        let digit = getDigits(nums[i],k);
+                        bucket[digit].push(nums[i]);
+                        
+                    }
+                    console.log(bucket);
+                    nums=[].concat(...bucket);
+                    console.log(nums);
+                    
+                }
+                return nums;
+            }
+            
+            
+            
+            
+        </script>
+    </body>
+</html>
